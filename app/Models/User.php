@@ -11,6 +11,15 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    //Relación uno a muchos creo (un usuario tiene muchos favoritos)
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+
+
+
     /**
      * The attributes that are mass assignable.
      *
