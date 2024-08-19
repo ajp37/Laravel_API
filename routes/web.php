@@ -2,16 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return ['Laravel' => app()->version()];
-});
-
 require __DIR__.'/auth.php';
 
 
 //añadido por mi
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\FavoriteController;
 
 // Ruta para la página de inicio (registro)
 Route::get('/', function () {

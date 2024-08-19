@@ -44,23 +44,18 @@ class FavoriteController extends Controller
 
     public function index(Request $request)
     {
-        // Obtener el usuario autenticado
         $user = $request->user();
+        $favorites = $user->favorites()->get();
 
-        // Obtener los personajes favoritos del usuario
-        $favorites = $user->favorites()->paginate(10);
-
-        // Enriquecer la respuesta con los datos del personaje desde la API de Rick & Morty
+        // Para cada favorito, obtenemos los detalles del personaje
         $favoritesWithDetails = $favorites->map(function ($favorite) {
             $response = Http::get("https://rickandmortyapi.com/api/character/{$favorite->character_id}");
-            if ($response->successful()) {
-                return $response->json(); // Retorna los detalles del personaje
-            }
-            return $favorite; // Si falla, devuelve el favorito sin detalles
+            return $response->json();
         });
 
-        return response()->json($favoritesWithDetails, 200);
+        return view('favorites.index', ['favorites' => $favoritesWithDetails]);
     }
+
 
     public function destroy($id, Request $request)
     {
