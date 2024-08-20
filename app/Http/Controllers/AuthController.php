@@ -12,24 +12,24 @@ class AuthController extends Controller
 {
     // Registro de usuario
     public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
+    
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed', // Laravel espera el campo 'password_confirmation'
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        //return response()->json(['access_token' => $token, 'token_type' => 'Bearer'], 201);
-        return redirect('/characters');
-    }
+    // Crear el token de autenticación y redirigir
+    $token = $user->createToken('auth_token')->plainTextToken;
+    return redirect('/characters');
+}
 
     // Login de usuario
     public function login(Request $request)

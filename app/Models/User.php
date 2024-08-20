@@ -2,26 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens; // Asegúrate de incluir esto
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-
-    //Relación uno a muchos creo (un usuario tiene muchos favoritos)
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
-
-
+    use HasApiTokens, HasFactory, Notifiable; // Incluye HasApiTokens aquí
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar masivamente.
      *
      * @var array<int, string>
      */
@@ -32,7 +23,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Los atributos que deben ser ocultos para la serialización.
      *
      * @var array<int, string>
      */
@@ -42,15 +33,22 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Los atributos que deben ser transformados para sus valores nativos.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Relación uno a muchos con favoritos.
+     *
+     * Un usuario puede tener muchos favoritos.
+     */
+    public function favorites()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Favorite::class);
     }
 }
