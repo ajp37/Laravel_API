@@ -22,10 +22,13 @@ Route::get('/', function () {
 
 
 
-// Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+
+Route::get('/register', function () {
+    return view('auth.register');
+});
 Route::post('/register', [AuthController::class, 'register']);
 
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');// configurar(2) para que showloginform muestre cada vista
+
 Route::get('/login', function () {
     return view('auth.login');
 });

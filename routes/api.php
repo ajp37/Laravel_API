@@ -18,8 +18,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 use App\Http\Controllers\AuthController;
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/login', [AuthController::class, 'login']); no se si se usa o no
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 

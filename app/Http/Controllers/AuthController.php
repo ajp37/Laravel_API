@@ -28,7 +28,7 @@ class AuthController extends Controller
 
     // Crear el token de autenticación y redirigir
     $token = $user->createToken('auth_token')->plainTextToken;
-    return redirect('/characters');
+    return redirect('/favorites');
 }
 
     // Login de usuario
@@ -49,7 +49,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         //return response()->json(['access_token' => $token, 'token_type' => 'Bearer'], 200);
-        return redirect('/characters');
+        return redirect('/favorites');
     }
 
     // Logout del usuario (opcional) NO USADO EN VISTAS DE MOMENTO

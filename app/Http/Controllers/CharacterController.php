@@ -57,7 +57,7 @@ class CharacterController extends Controller
             return response()->json(['message' => 'Character not found'], 404);
         }
 
-        return response()->json($response->json(), 200);
+        return response()->json($response->json(), 200);// sacar esto a datos de vista y mostrar
     }
 }
 
