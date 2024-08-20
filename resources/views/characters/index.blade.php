@@ -7,15 +7,17 @@
     <title>Characters</title>
 </head>
 <body>
+    <h1>Welcome, {{ Auth::user()->name }}</h1>
+    <h1>Characters</h1>
+    <a href="/favorites">View Favorites</a>
+
     <!-- Botón de logout -->
     <form id="logout-form" action="/logout" method="POST" style="display:inline;">
         @csrf
         <button type="submit">Logout</button>
     </form>
-    <!-- Funciona pero hay que dar el logout al cliente y mandar a (/(home)) y hay que quitar que el /characters sea bajo autenticación --> 
-    <h1>Welcome, {{ Auth::user()->name }}</h1>
-    <h1>Characters</h1>
-    <a href="/favorites">View Favorites</a>
+
+    <!-- Listado de personajes -->
     <ul>
         @foreach ($characters as $character)
             <li>
@@ -24,5 +26,16 @@
             </li>
         @endforeach
     </ul>
+
+    <!-- Paginación -->
+    <div>
+        @if ($pagination['current_page'] > 1)
+            <a href="?page={{ $pagination['current_page'] - 1 }}">Previous</a>
+        @endif
+
+        @if ($pagination['current_page'] < $pagination['total_pages'])
+            <a href="?page={{ $pagination['current_page'] + 1 }}">Next</a>
+        @endif
+    </div>
 </body>
 </html>
