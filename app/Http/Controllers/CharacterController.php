@@ -13,7 +13,15 @@ class CharacterController extends Controller
     {
         // Página actual (default: 1)
         $page = $request->input('page', 1);
-        $url = "https://rickandmortyapi.com/api/character?page={$page}";
+
+        // Obtener los filtros de la solicitud
+        $query = $request->input('query', ''); // Filtro por nombre
+        $status = $request->input('status', ''); // Filtro por estado
+        $species = $request->input('species', ''); // Filtro por especie
+        $gender = $request->input('gender', ''); // Filtro por género
+
+        // Construir la URL con los filtros y la paginación
+        $url = "https://rickandmortyapi.com/api/character?page={$page}&name={$query}&status={$status}&species={$species}&gender={$gender}";
 
         $response = Http::get($url);
 
@@ -39,8 +47,11 @@ class CharacterController extends Controller
                 'current_page' => $page,
                 'total_pages' => $totalPages,
             ],
+            // Pasar los filtros actuales a la vista para mantener los valores en el formulario
+            'filters' => compact('query', 'status', 'species', 'gender'),
         ]);
     }
+
 
 
 
