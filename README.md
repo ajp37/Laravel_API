@@ -173,6 +173,12 @@ curl -X POST http://localhost:8000/login \
 curl -X GET 'http://localhost:8000/characters?page=1&query=Rick'
 ```
 
+### Ejemplo de Solicitud para Obtener Detalles de un Personaje
+```bash
+curl -X GET 'http://localhost:8000/characters/{id}'
+```
+Reemplaza {id} con el ID del personaje que deseas obtener.
+
 ### Ejemplo de Solicitud para Añadir un Personaje a Favoritos
 ```bash
 curl -X POST http://localhost:8000/favorites \
@@ -180,12 +186,21 @@ curl -X POST http://localhost:8000/favorites \
 -H "Content-Type: application/json" \
 -d '{"character_id": 1}'
 ```
+Reemplaza 1 con el ID del personaje que deseas añadir a favoritos.
 
 ### Ejemplo de Solicitud para Eliminar un Personaje de Favoritos
 ```bash
 curl -X DELETE http://localhost:8000/favorites/1 \
 -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
+Reemplaza 1 con el ID del personaje que deseas eliminar de favoritos.
+
+### Ejemplo de Solicitud para Obtener Lista de Favoritos
+```bash
+curl -X GET http://localhost:8000/favorites \
+-H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
 
 ## Licencia
 ### Este proyecto está bajo la Licencia MIT.
