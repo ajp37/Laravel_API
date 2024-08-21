@@ -10,11 +10,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 // Quitar lo de arriba?
 use App\Http\Controllers\FavoriteController;
 // Rutas protegidas por autenticación
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/favorites', [FavoriteController::class, 'store']);
-    Route::get('/favorites', [FavoriteController::class, 'index']);
-    Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
-});
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::post('/favorites', [FavoriteController::class, 'store']);
+//     Route::get('/favorites', [FavoriteController::class, 'index']);
+//     Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
+// });
 
 
 use App\Http\Controllers\AuthController;
@@ -25,6 +25,6 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 
 use App\Http\Controllers\CharacterController;
 // Route::get('/characters', [CharacterController::class, 'index']); NO SE SI SE USA
-Route::get('/characters/{id}', [CharacterController::class, 'show']);
+// Route::get('/characters/{id}', [CharacterController::class, 'show']);
 
 

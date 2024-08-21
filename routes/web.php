@@ -42,6 +42,12 @@ Route::post('/login', [AuthController::class, 'login']);
 // Ruta para mostrar el listado de personajes
 Route::get('/characters', [CharacterController::class, 'index']);
 
+// Ruta para mostrar el detalle de un personaje
+Route::get('/characters/{id}', [CharacterController::class, 'show'])->name('characters.show');
+//
+
 // Ruta para mostrar los favoritos
 Route::get('/favorites', [FavoriteController::class, 'index'])->middleware('auth');
 
+// Ruta para agregar un personaje a favoritos
+Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store')->middleware('auth');

@@ -33,14 +33,16 @@ class FavoriteController extends Controller
             return response()->json(['message' => 'Character already in favorites'], 409);
         }
 
-        // Guardar el personaje en favoritos (opcionalmente puedes almacenar más datos del personaje)
-        $favorite = new Favorite();
-        $favorite->user_id = $user->id;
-        $favorite->character_id = $characterId;
+        // Guardar el personaje en favoritos
+        $favorite = new Favorite([
+            'user_id' => $user->id,
+            'character_id' => $characterId,
+        ]);
         $favorite->save();
 
         return response()->json($favorite, 201);
     }
+
 
     public function index(Request $request)
     {

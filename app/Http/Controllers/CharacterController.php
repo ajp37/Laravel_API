@@ -49,16 +49,22 @@ class CharacterController extends Controller
 
     // Obtener detalle de un personaje por ID
     public function show($id)
-    {
-        // Llamada a la API de Rick & Morty
-        $response = Http::get("https://rickandmortyapi.com/api/character/{$id}");
+{
+    // Llamada a la API de Rick & Morty
+    $response = Http::get("https://rickandmortyapi.com/api/character/{$id}");
 
-        if ($response->failed()) {
-            return response()->json(['message' => 'Character not found'], 404);
-        }
-
-        return response()->json($response->json(), 200);// sacar esto a datos de vista y mostrar
+    // Verificar si la respuesta falló
+    if ($response->failed()) {
+        return response()->json(['message' => 'Character not found'], 404);
     }
+
+    // Obtener los datos del personaje
+    $character = $response->json();
+
+    // Retornar una vista con los datos del personaje
+    return view('characters.show', compact('character'));
+}
+
 }
 
 
