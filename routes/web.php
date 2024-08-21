@@ -40,7 +40,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 // Ruta para mostrar el listado de personajes
-Route::get('/characters', [CharacterController::class, 'index'])->middleware('auth');
+Route::get('/characters', [CharacterController::class, 'index']);
 
 // Ruta para mostrar los favoritos
 Route::get('/favorites', [FavoriteController::class, 'index'])->middleware('auth');

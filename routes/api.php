@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 
 
 use App\Http\Controllers\CharacterController;
-Route::get('/characters', [CharacterController::class, 'index']);
+// Route::get('/characters', [CharacterController::class, 'index']); NO SE SI SE USA
 Route::get('/characters/{id}', [CharacterController::class, 'show']);
 
 

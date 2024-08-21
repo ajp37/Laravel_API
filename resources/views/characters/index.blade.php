@@ -7,7 +7,6 @@
     <title>Characters</title>
 </head>
 <body>
-    <h1>Welcome, {{ Auth::user()->name }}</h1>
     <h1>Characters</h1>
     <a href="/favorites">View Favorites</a>
 

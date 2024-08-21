@@ -7,29 +7,37 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     // Registro de usuario
     public function register(Request $request)
-    
 {
+    // Validar los datos de entrada
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8|confirmed', // Laravel espera el campo 'password_confirmation'
+        'password' => 'required|string|min:8|confirmed', // 'password_confirmation' en el formulario
     ]);
 
+    // Crear el nuevo usuario
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
     ]);
 
-    // Crear el token de autenticación y redirigir
+    // Autenticar al usuario automáticamente después del registro
+    Auth::login($user);
+
+    // Crear el token de autenticación
     $token = $user->createToken('auth_token')->plainTextToken;
-    return redirect('/favorites');
+
+    // Redirigir al usuario
+    return redirect('/favorites')->with('auth_token', $token);
 }
+
 
     // Login de usuario
     public function login(Request $request)
