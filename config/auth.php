@@ -40,13 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        //añadido por mi
+        //sanctum
         'api' => [
             'driver' => 'sanctum',
             'provider' => 'users',
             'hash' => false,
         ],
-        //por mi
     ],
 
     
