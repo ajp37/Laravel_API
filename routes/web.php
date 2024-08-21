@@ -1,49 +1,39 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-require __DIR__.'/auth.php';
-
-
-//añadido por mi
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\FavoriteController;
 
-// Ruta para la página de inicio (registro)
-Route::get('/', function () {
-    return view('auth.register');
-});
-
-// Ruta para el formulario de inicio de sesión
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('login');
+require __DIR__.'/auth.php';
 
 
+// Ruta para la página de inicio (Characters)
+Route::get('/', [CharacterController::class, 'index']);
 
-
+// Ruta para el registro
 Route::get('/register', function () {
     return view('auth.register');
 });
+// Registrar usuario
 Route::post('/register', [AuthController::class, 'register']);
 
-
+// Ruta para el login
 Route::get('/login', function () {
     return view('auth.login');
 });
-
-
+// Iniciar sesión
 Route::post('/login', [AuthController::class, 'login']);
 
-
+// Cierre de sesión
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // Ruta para mostrar el listado de personajes
 Route::get('/characters', [CharacterController::class, 'index']);
 
 // Ruta para mostrar el detalle de un personaje
-Route::get('/character/{id}', [CharacterController::class, 'show'])->name('characters.show');
+Route::get('/characters/{id}', [CharacterController::class, 'show'])->name('characters.show');
 // he quitado la (/...s)
 
 // Ruta para mostrar los favoritos

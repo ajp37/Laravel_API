@@ -25,6 +25,7 @@ class CharacterController extends Controller
 
         $response = Http::get($url);
 
+        // Verificar si la solicitud falló
         if ($response->failed()) {
             // Manejar errores de solicitud
             return view('characters.index', [
@@ -41,6 +42,7 @@ class CharacterController extends Controller
         // Calcular total de páginas
         $totalPages = $data['info']['pages'];
 
+        // Retornar una vista con los datos de los personajes
         return view('characters.index', [
             'characters' => $data['results'],
             'pagination' => [
@@ -51,8 +53,6 @@ class CharacterController extends Controller
             'filters' => compact('query', 'status', 'species', 'gender'),
         ]);
     }
-
-
 
 
     // Obtener detalle de un personaje por ID

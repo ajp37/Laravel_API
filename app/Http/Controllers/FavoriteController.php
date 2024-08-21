@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class FavoriteController extends Controller
 {
+    // Guardar un personaje en favoritos
     public function store(Request $request)
     {
         // Validar que se recibe el character_id
@@ -16,11 +17,13 @@ class FavoriteController extends Controller
             'character_id' => 'required|integer',
         ]);
 
+        // Obtener el character_id del request
         $characterId = $request->input('character_id');
 
         // Hacer la solicitud a la API de Rick & Morty para obtener detalles del personaje
         $response = Http::get("https://rickandmortyapi.com/api/character/{$characterId}");
 
+        // Verificar si la solicitud falló
         if ($response->failed()) {
             return response()->json(['message' => 'Character not found in Rick & Morty API'], 404);
         }
@@ -40,15 +43,17 @@ class FavoriteController extends Controller
         ]);
         $favorite->save();
 
-        // return response()->json($favorite, 201); respuesta json
         // Redirigir a la página de favoritos con un mensaje de éxito
         return redirect('/favorites')->with('success', 'Character added to favorites successfully');
     }
 
 
+    // Mostrar la lista de personajes favoritos
     public function index(Request $request)
     {
+        // Obtener el usuario autenticado
         $user = $request->user();
+        // Obtener los favoritos del usuario
         $favorites = $user->favorites()->get();
 
         // Para cada favorito, obtenemos los detalles del personaje
@@ -57,10 +62,12 @@ class FavoriteController extends Controller
             return $response->json();
         });
 
+        // Retornar la vista con los datos de los personajes favoritos
         return view('favorites.index', ['favorites' => $favoritesWithDetails]);
     }
 
 
+    // Eliminar un personaje de favoritos
     public function destroy($id, Request $request)
     {
         // Obtener el usuario autenticado
@@ -80,8 +87,4 @@ class FavoriteController extends Controller
         // Redirigir de vuelta a la lista de favoritos con un mensaje de éxito
         return redirect('/favorites')->with('success', 'Character removed from favorites successfully');
     }
-    
-
-
-
 }
