@@ -121,10 +121,20 @@ Este proyecto es una API backend desarrollada en Laravel que se conecta con la A
     - **Parámetros**: `character_id`
     - **Respuesta Exitosa**: Mensaje indicando que el personaje fue añadido a favoritos y redirige a `/favorites`.
 
+- **GET /favorites**
+    - **Descripción**: Obtiene el listado de personajes que el usuario ha guardado en su lista de favoritos.
+    - **Parámetros**: Ninguno: El endpoint no requiere parámetros en la solicitud. La autenticación del usuario se maneja a nivel de sesión o token.
+    - **Respuesta Exitosa**: Muestra la lista de favoritos del usuario.
+
 - **DELETE /favorites/{id}**
     - **Descripción**: Elimina un personaje de la lista de favoritos del usuario.
     - **Parámetros**: `id` (ID del personaje)
     - **Respuesta Exitosa**: Mensaje indicando que el personaje fue eliminado de favoritos.
+
+### Probar API desde interfaz
+Al acceder a la ruta base (/), redirige a la página de personajes (/characters), donde el usuario puede acceder a los formularios de registro/inicio de sesión, ver el listado de personajes y ver detalles de un personaje en específico. Si está autenticado, podrá visualizar un enlace que redirige a la lista de favoritos.
+Viene por defecto un usuario creado; example@gmail.com, password:12345678. Este incluye varios personajes de ejemplo añadidos a su lista de favoritos.
+
 
 ### Autenticación
 
