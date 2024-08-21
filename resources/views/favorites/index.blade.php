@@ -1,13 +1,25 @@
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favorites</title>
+    <title>Favorites list</title>
 </head>
 <body>
     <h1>Your Favorite Characters</h1>
-    <a href="/characters">Back to Characters</a>
+    <a href="/characters">Back to Characters List</a>
     <ul>
         @foreach ($favorites as $favorite)
             <li>

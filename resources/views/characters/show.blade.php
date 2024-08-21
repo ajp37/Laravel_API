@@ -15,19 +15,17 @@
     <p><strong>Gender:</strong> {{ $character['gender'] }}</p>
     <p><strong>Origin:</strong> {{ $character['origin']['name'] }}</p>
     <p><strong>Location:</strong> {{ $character['location']['name'] }}</p>
+    <p><strong>ID:</strong> {{$character['id']}}</p>
 
-    <a href="{{ url('/characters') }}">Back to Characters List</a>
-
-
+    <br>
     <form method="POST" action="{{ route('favorites.store') }}">
         @csrf
-        <input type="hidden" name="character_id" value="1">
+        <input type="hidden" name="character_id" value="{{$character['id']}}">
         <button type="submit">Add to Favorites</button>
     </form>
 
-
-
-
+    <br>
+    <a href="{{ url('/characters') }}">Back to Characters List</a>
 </body>
 
 </html>

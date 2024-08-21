@@ -43,11 +43,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/characters', [CharacterController::class, 'index']);
 
 // Ruta para mostrar el detalle de un personaje
-Route::get('/characters/{id}', [CharacterController::class, 'show'])->name('characters.show');
-//
+Route::get('/character/{id}', [CharacterController::class, 'show'])->name('characters.show');
+// he quitado la (/...s)
 
 // Ruta para mostrar los favoritos
 Route::get('/favorites', [FavoriteController::class, 'index'])->middleware('auth');
 
 // Ruta para agregar un personaje a favoritos
 Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store')->middleware('auth');
+
+// Ruta para eliminar un personaje de favoritos
+Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy')->middleware('auth');

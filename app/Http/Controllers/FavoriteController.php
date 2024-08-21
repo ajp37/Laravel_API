@@ -30,7 +30,7 @@ class FavoriteController extends Controller
 
         // Verificar si el personaje ya está en los favoritos del usuario
         if ($user->favorites()->where('character_id', $characterId)->exists()) {
-            return response()->json(['message' => 'Character already in favorites'], 409);
+            return redirect('/favorites')->with('error', 'The character already exists in the favorites list');
         }
 
         // Guardar el personaje en favoritos
@@ -40,7 +40,9 @@ class FavoriteController extends Controller
         ]);
         $favorite->save();
 
-        return response()->json($favorite, 201);
+        // return response()->json($favorite, 201); respuesta json
+        // Redirigir a la página de favoritos con un mensaje de éxito
+        return redirect('/favorites')->with('success', 'Character added to favorites successfully');
     }
 
 
@@ -63,19 +65,22 @@ class FavoriteController extends Controller
     {
         // Obtener el usuario autenticado
         $user = $request->user();
-
+    
         // Buscar el favorito en la base de datos usando el character_id
         $favorite = $user->favorites()->where('character_id', $id)->first();
-
+    
         // Verificar si el personaje existe en los favoritos del usuario
         if (!$favorite) {
-            return response()->json(['message' => 'Character not found in favorites'], 404);
+            return redirect('/favorites')->with('error', 'Character not found in favorites');
         }
-
+    
         // Eliminar el favorito
         $favorite->delete();
-        return response()->json(['message' => 'Character removed from favorites'], 200);
+    
+        // Redirigir de vuelta a la lista de favoritos con un mensaje de éxito
+        return redirect('/favorites')->with('success', 'Character removed from favorites successfully');
     }
+    
 
 
 
