@@ -133,7 +133,6 @@ Este proyecto es una API backend desarrollada en Laravel que se conecta con la A
 
 ### Probar API desde interfaz
 Al acceder a la ruta base (/), redirige a la página de personajes (/characters), donde el usuario puede acceder a los formularios de registro/inicio de sesión, ver el listado de personajes y ver detalles de un personaje en específico. Si está autenticado, podrá visualizar un enlace que redirige a la lista de favoritos.
-Viene por defecto un usuario creado; example@gmail.com, password:12345678. Este incluye varios personajes de ejemplo añadidos a su lista de favoritos.
 
 
 ### Autenticación
