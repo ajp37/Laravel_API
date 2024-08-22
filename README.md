@@ -132,7 +132,8 @@ Este proyecto es una API backend desarrollada en Laravel que se conecta con la A
     - **Respuesta Exitosa**: Mensaje indicando que el personaje fue eliminado de favoritos.
 
 ### Probar API desde interfaz
-Al acceder a la ruta base (/), redirige a la página de personajes (/characters), donde el usuario puede acceder a los formularios de registro/inicio de sesión, ver el listado de personajes y ver detalles de un personaje en específico. Si está autenticado, podrá visualizar un enlace que redirige a la lista de favoritos.
+Al acceder a la ruta base (/), redirige a la página de personajes (/characters), donde el usuario puede acceder a los formularios de registro/inicio de sesión, ver el listado de personajes y ver detalles de un personaje en específico. Pulsando en el nombre del personaje el usuario accede a la vista que ofrece informacion de ese personaje en concreto, donde puede añadirlo a favoritos desde un botón.
+Solo si el usuario está autenticado, podrá visualizar el enlace que redirige a la lista de favoritos, visualizar la lista de favoritos y añadir el personaje a favoritos.
 
 
 ### Autenticación
